@@ -7,6 +7,9 @@ class Api::V2::TeamsController < ApplicationController
      @team.save
      render :show
    end
+   def new
+
+   end
    def show
     @team = Team.find_by(id: params[:id])
    end
