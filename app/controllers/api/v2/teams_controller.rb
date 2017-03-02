@@ -1,6 +1,7 @@
 class Api::V2::TeamsController < ApplicationController
    def index
      @teams = Team.all
+     render json: @teams
    end
    def create
      @team = Team.new(creature: params[:creature], name: params[:name], state: params[:state], sport: params[:sport])
