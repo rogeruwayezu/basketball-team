@@ -1,21 +1,33 @@
 <div ng-app="app">
 
   <div ng-controller="teamsCtrl" ng-init="setup()">
-    <h1>Number of teams: {{teams.length}}</h1>
-    <ul>
-    <li ng-repeat="team in teams">
-     <p>Creature: {{team.creature}}</p>
-     <p>Name: {{team.name}}</p>
-     <p>State: {{team.state}}</p>
-     <p>Sport: {{team.sport}}</p>
-    </li>
-    </ul> 
+   <h1>Number of teams: {{teams.length}}</h1>
+   Filter teams: <input ng-model="filterQuery">
+  <table class="table">
+    <tr >
+          <th ng-click="toggleOrder('creature')">Creature</th>
+          <th ng-click="toggleOrder('name')">Name</th>
+          <th ng-click="toggleOrder('state')">State</th>
+          <th ng-click="toggleOrder('sport')">Sport</th>
+          <th>Delete</th>
+    <tr ng-repeat="team in teams | filter: filterQuery | orderBy:o">
+       <td>{{team.creature}}</td>
+       <td>{{team.name}}</td>
+       <td>{{team.state}}</td>
+       <td>{{team.sport}}</td>
+       <td><button ng-click="deleteTeam(team, $index)">Delete team</button></td>
+    </tr>
+  </table>
+
+    <button ng-click="updateTeam(team, $index, teamCreature, teamName, teamState, teamSport)">Update Team</button>
+  
     <div>
       Creature: <input ng-model="teamCreature">
       Name: <input ng-model="teamName">
       State: <input ng-model="teamState">
       Sport: <input ng-model="teamSport">
-      <button ng-click="addteam(teamCreature, teamName, teamState, teamSport)">Add Team</button>
+      <button ng-click="addTeam(teamCreature, teamName, teamState, teamSport)">Add Team</button>
     </div>
+
   </div>
 </div>

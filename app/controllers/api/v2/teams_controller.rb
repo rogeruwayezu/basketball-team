@@ -17,6 +17,7 @@ class Api::V2::TeamsController < ApplicationController
    def update
     @team = Team.find_by(id: params[:id])
     @team.update(creature: params[:creature], name: params[:name], state: params[:state], sport: params[:sport])
+    render :show
    end
    def destroy
     @team = Team.find_by(id: params[:id])

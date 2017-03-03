@@ -21,10 +21,33 @@
       });
     }
 
-    $scope.deletePerson = function(index) {
-      //$http.delete(......)
-      $scope.people.splice(index, 1);
+    $scope.updateTeam = function(team, teamCreature, teamName, teamState, teamSport) {
+      var teamData = {
+        creature: teamCreature,
+        name: teamName,
+        state: teamState,
+        sport: teamSport
+      };
+      $http.patch("/api/v2/teams/" + team.id + ".json", teamData).then(function(response){
+        var index = $scope.people.indexOf(person);
+        $scope.people[index] = response.data;
+    });
     }
+     $scope.deleteTeam = function(team, index) {
+      $http.delete("/api/v2/teams/" + team.id + ".json").then(function(response){
+        $scope.teams.splice(index, 1);
+      });
+    }
+
+
+      $scope.toggleOrder = function(attribute) {
+        if ($scope.orderAttribute === attribute){
+          $scope.orderAttribute = !$scope.orderAttribute;
+        }else{
+          $scope.orderAttribute = attribute;
+        }
+      };
+     
 
 
     window.$scope = $scope;
