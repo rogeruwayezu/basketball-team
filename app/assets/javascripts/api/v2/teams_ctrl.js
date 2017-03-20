@@ -41,12 +41,12 @@
 
 
       $scope.toggleOrder = function(attribute) {
-        if ($scope.orderAttribute === attribute){
-          $scope.orderAttribute = !$scope.orderAttribute;
-        }else{
-          $scope.orderAttribute = attribute;
-        }
-      };
+      if (attribute === $scope.orderAttribute) {
+        $scope.descending = !$scope.descending
+      } else {
+        $scope.orderAttribute = attribute;
+      }
+    };
      
 
 

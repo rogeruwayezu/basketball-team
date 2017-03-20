@@ -1,8 +1,13 @@
 <div ng-app="app">
 
   <div ng-controller="teamsCtrl" ng-init="setup()">
-   <h1>Number of teams: {{teams.length}}</h1>
-   Filter teams: <input ng-model="filterQuery">
+    <div>
+      <datalist id="names">
+        <option ng-repeat="team in teams">{{team.creature}} - {{team.name}}</option>
+      </datalist>
+    </div>
+   <!-- <h1>Number of teams: {{teams.length}}</h1> -->
+   Filter teams: <input ng-model="filterQuery" list="names">
   <table class="table">
     <tr >
           <th ng-click="toggleOrder('creature')">Creature</th>
@@ -10,7 +15,7 @@
           <th ng-click="toggleOrder('state')">State</th>
           <th ng-click="toggleOrder('sport')">Sport</th>
           <th>Delete</th>
-    <tr ng-repeat="team in teams | filter: filterQuery | orderBy:o">
+    <tr ng-repeat="team in teams | filter: filterQuery | orderBy:orderAttribute:descending">
        <td>{{team.creature}}</td>
        <td>{{team.name}}</td>
        <td>{{team.state}}</td>
